@@ -1,0 +1,276 @@
+/* Task Graph plugin styles */
+
+.tg-host {
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tg-toolbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+}
+
+.tg-toolbar-label {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.tg-toolbar .tg-groupby {
+  height: 26px;
+}
+
+.tg-relayout {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.tg-graph-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+}
+
+.tg-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  background:
+    radial-gradient(circle at 1px 1px, var(--background-modifier-border) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+.tg-viewport.tg-panning {
+  cursor: grabbing;
+}
+
+.tg-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* SVG edge layer: sits at world origin, draws beyond its 0x0 box. */
+.tg-edges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.tg-edge {
+  stroke-linecap: round;
+}
+
+.tg-edge-assoc {
+  stroke: var(--background-modifier-border);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+
+.tg-edge-dep {
+  stroke: var(--text-accent);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+
+.tg-arrowhead {
+  fill: var(--text-accent);
+}
+
+/* Cards */
+.tg-card {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 190px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: var(--shadow-s);
+  cursor: grab;
+  user-select: none;
+  transition: box-shadow 0.1s ease;
+}
+
+.tg-card:hover {
+  box-shadow: var(--shadow-l);
+  z-index: 5;
+}
+
+.tg-card.tg-dragging {
+  cursor: grabbing;
+  box-shadow: var(--shadow-l);
+  z-index: 10;
+}
+
+.tg-card.tg-done {
+  opacity: 0.55;
+}
+
+.tg-card.tg-cancelled {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+
+.tg-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.tg-toggle {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  border-radius: 50%;
+  border: 2px solid var(--tg-area-color, var(--text-muted));
+  cursor: pointer;
+}
+
+.tg-toggle.tg-toggle-on {
+  background: var(--tg-area-color, var(--interactive-accent));
+  box-shadow: inset 0 0 0 2px var(--background-primary);
+}
+
+.tg-title {
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+.tg-card.tg-done .tg-title {
+  text-decoration: line-through;
+}
+
+.tg-title:hover {
+  color: var(--text-accent);
+}
+
+.tg-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+  font-size: 0.72em;
+  color: var(--text-muted);
+}
+
+.tg-card-meta span {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--background-secondary);
+}
+
+.tg-group {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.tg-due {
+  color: var(--text-warning, var(--text-muted));
+}
+
+/* Legend */
+.tg-legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  font-size: 0.75em;
+  max-height: 60%;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+.tg-legend-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+}
+
+.tg-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 0;
+}
+
+.tg-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.tg-legend-label {
+  text-transform: capitalize;
+}
+
+/* Grid layout group headers */
+.tg-group-header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--background-modifier-border);
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--text-normal);
+  box-sizing: border-box;
+}
+
+.tg-group-header-swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.tg-group-header-label {
+  text-transform: capitalize;
+}
+
+.tg-group-header-count {
+  font-size: 0.8em;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--background-secondary);
+  border-radius: 8px;
+  padding: 0 7px;
+}
+
+.tg-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-muted);
+  font-size: 0.9em;
+}

@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-task-graph",
+  "name": "Task Graph",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Floating-card graph of your tasks, clustered by area and connected by shared projects, people, and dependencies. Companion to the obsidian-second-brain skill.",
+  "author": "Johan Villalba",
+  "authorUrl": "https://github.com/johanvillalbab",
+  "isDesktopOnly": false
+}
